@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
+import {auth} from "../Firebase/Config";
 
 class Profile extends Component {
-
     constructor(props){
         super(props)
         this.state={
@@ -10,9 +10,10 @@ class Profile extends Component {
         }
     }
     render() {
+        console.log(auth.currentUser)
         return (
             <View>
-                
+               <Text>{auth.currentUser.email}</Text> 
             </View>
         );
     }

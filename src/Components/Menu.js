@@ -3,9 +3,9 @@ import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
-import Login from "../Screens/login";
-import Register from "../Screens/register";
-import { auth, db } from "../Firebase/config";
+import Login from "../Screens/Login";
+import Register from "../Screens/Register";
+import { auth, db } from "../Firebase/Config";
 import TabNavigation from "./TabNavigation";
 
 class Menu extends Component {

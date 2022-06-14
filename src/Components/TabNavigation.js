@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
-import Profile from "../Screens/profile";
-import Home from "../Screens/home";
-import Buscar from "../Screens/buscar";
-import AgregarPost from "../Screens/agregarPost";
+import Profile from "../Screens/Profile";
+import Home from "../Screens/Home";
+import Buscar from "../Screens/Buscar";
+import AgregarPost from "../Screens/AddPost";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import {auth} from "../Firebase/config";
+import {auth} from "../Firebase/Config";
 
 class Profile extends Component {
     constructor(props){
