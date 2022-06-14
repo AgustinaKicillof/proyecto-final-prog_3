@@ -69,7 +69,8 @@ class Menu extends Component {
       <NavigationContainer>
         <Stack.Navigator>
           {this.state.loggedIn ? (
-            <Stack.Screen name="Menu" component={TabNavigation} initialParams={{
+            <Stack.Screen name="Menu" component={TabNavigation} options={ { headerShown: false } } 
+            initialParams={{
                 logout: () =>
                   this.logout(),
               }}/>
