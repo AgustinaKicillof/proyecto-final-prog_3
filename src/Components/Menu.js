@@ -7,6 +7,7 @@ import Login from "../Screens/Login";
 import Register from "../Screens/Register";
 import { auth, db } from "../Firebase/Config";
 import TabNavigation from "./TabNavigation";
+import Comments from "../Screens/Comments"
 
 class Menu extends Component {
   constructor() {
@@ -69,11 +70,15 @@ class Menu extends Component {
       <NavigationContainer>
         <Stack.Navigator>
           {this.state.loggedIn ? (
-            <Stack.Screen name="Menu" component={TabNavigation} options={ { headerShown: false } } 
+            <Stack.Group>
+                 <Stack.Screen name="Menu" component={TabNavigation} options={ { headerShown: false } } 
             initialParams={{
                 logout: () =>
                   this.logout(),
               }}/>
+              <Stack.Screen name="Comments" component={Comments}/>
+            </Stack.Group>
+           
           ) : (
             <Stack.Group>
               <Stack.Screen

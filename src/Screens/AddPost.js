@@ -61,7 +61,7 @@ class AddPost extends Component{
                         onChangeText={text => this.setState({ description: text})}
                         multiline
                     />
-                    <TouchableOpacity style={styles.button} onPress={()=>this.guardarPost()}>
+                    <TouchableOpacity style={styles.button} onPress={()=>this.guardarPost()} disabled={this.state.description.length===0?true:false}>
                         <Text style={styles.buttonText}>Guardar Post</Text>
                     </TouchableOpacity>               
                 </View>

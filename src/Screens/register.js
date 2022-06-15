@@ -35,7 +35,7 @@ class register extends Component {
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ password: text})}
                 />
-                <TouchableOpacity onPress={()=>this.props.route.params.register(this.state.email, this.state.password, this.state.username)}>
+                <TouchableOpacity onPress={()=>this.props.route.params.register(this.state.email, this.state.password, this.state.username)} disabled={this.state.email.length===0 || this.state.username.length===0 || this.state.password.length===0?true:false}>
                     <Text>Registrarme</Text>
                 </TouchableOpacity>       
             </View>
