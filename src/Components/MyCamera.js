@@ -89,7 +89,7 @@ class MyCamera extends Component{
                         <TouchableOpacity 
                             style={styles.button}
                             onPress={()=>this.sacarFoto()}>
-                            <Text>Tomar foto</Text>
+                            <Text style={styles.buttonText}>Tomar foto</Text>
                         </TouchableOpacity>
                     </View> 
                     :
@@ -122,14 +122,24 @@ class MyCamera extends Component{
 const styles = StyleSheet.create({
     cameraBody: {
         height: '80%',
+        alignItems: 'center'
     },
     button:{
         height: '20%',
+        width: '150%',
         borderColor: '#ccc',
         borderWidth: 1,
         padding: 5,
         borderRadius: 4,
-        marginTop: 20
+        marginTop: 20,
+        backgroundColor: 'green',
+        
+    },
+    buttonText:{
+        textAlign: 'center',
+        color: 'white',
+        marginTop: 10,
+        fontSize: 20
     },
     preview:{
         height:'80%'
