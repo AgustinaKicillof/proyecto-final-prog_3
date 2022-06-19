@@ -35,7 +35,8 @@ class TabNavigation extends Component {
        <Tab.Screen name = "Profile" component={Profile}
         options={ 
           { tabBarIcon: () => <FontAwesome name="user" size={24} color="black" /> }
-         } 
+         }
+         initialParams={{logout:()=>this.props.route.params.logout()}}
        />
       </Tab.Navigator>
     );

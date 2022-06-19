@@ -1,26 +1,74 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {auth} from "../Firebase/Config";
-
+import {View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, FlatList} from 'react-native';
+import {auth, db} from "../Firebase/Config";
+import Post from './Post';
 class Profile extends Component {
     constructor(props){
         super(props)
         this.state={
-           
+        user:{},
+        loading:true,
+        posts:[],
         }
     }
+    componentDidMount(){
+        db.collection("users").where("email","==",auth.currentUser.email).onSnapshot(
+            doc=>{
+                let user = [];
+                doc.forEach( oneDoc => {
+                    user.push({
+                        id: oneDoc.id,
+                        data: oneDoc.data()
+                    })
+                })
+
+                this.setState({
+                    user: user[0],
+                    loading: false
+                })
+            }
+        )
+        db.collection('posts').where("owner","==",auth.currentUser.email).onSnapshot(
+            docs => {
+                let posts = [];
+                docs.forEach( oneDoc => {
+                    posts.push({
+                        id: oneDoc.id,
+                        data: oneDoc.data()
+                    })
+                })
+
+                this.setState({
+                    posts: posts
+                })
+            }
+        )
+    }
     render() {
-        console.log(auth.currentUser)
+        console.log(this.state.user)
         return (
             <View style={styles.container}>
                <Text style={styles.title}>Mi perfil</Text>
-               <Text style={styles.info}>Username: </Text>
+               {this.state.loading?
+               <ActivityIndicator size="large" color="red"/>
+            :
+            <>
+             <Text style={styles.info}>Username: {this.state.user.data.username}</Text>
                <Text style={styles.info}>Correo: {auth.currentUser.email}</Text> 
-               <Text style={styles.info}>Fecha de ultimo ingreso: </Text>
-               <Text style={styles.info}>Cantidad de posteos: </Text>
-               <TouchableOpacity style={styles.button}>
+               <Text style={styles.info}>Fecha de ultimo ingreso: {auth.currentUser.metadata.lastSignInTime} </Text>
+               <Text style={styles.info}>Cantidad de posteos: {this.state.posts.length} </Text></>
+            }
+               <TouchableOpacity style={styles.button} onPress={()=>this.props.route.params.logout()}>
                 <Text style={styles.buttonText}>Cerrar sesión</Text>
                </TouchableOpacity>
+               <View>
+               <FlatList 
+                        data={this.state.posts}
+                        keyExtractor={post => post.id}
+                        renderItem = { ({item}) => <Post dataPost={item} 
+                        {...this.props} />}
+                    />
+               </View>
             </View>
         );
     }
@@ -28,7 +76,7 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        rowGap:10
+        
     },
     title:{
         marginBottom:15,

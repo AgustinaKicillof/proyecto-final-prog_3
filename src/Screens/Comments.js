@@ -55,7 +55,7 @@ class Comments extends Component{
         
         return(
                 <View style={styles.container}>
-                    {this.state.commentText.lenght===0?
+                    {this.state.commentText.length===0?
                     <Text> Aún no hay comentarios. Sé el primero en opinar</Text>:null}
                     
                     
