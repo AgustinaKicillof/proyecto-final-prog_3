@@ -14,7 +14,7 @@ class Profile extends Component {
         return (
             <View style={styles.container}>
                <Text style={styles.title}>Mi perfil</Text>
-               <Text style={styles.info}>Username: {auth.currentUser.displayName}</Text>
+               <Text style={styles.info}>Username: </Text>
                <Text style={styles.info}>Correo: {auth.currentUser.email}</Text> 
                <Text style={styles.info}>Fecha de ultimo ingreso: </Text>
                <Text style={styles.info}>Cantidad de posteos: </Text>
