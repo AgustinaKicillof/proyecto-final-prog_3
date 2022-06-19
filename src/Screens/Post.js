@@ -61,20 +61,20 @@ class Post extends Component{
         
         return(
                 <View style={styles.separator}>
-                    <Text>Post de: {this.props.dataPost.data.owner}</Text>
-                    <Text>Texto del Post: {this.props.dataPost.data.description}</Text>
-                     <Text>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
+                    <Text style={styles.info}>Post de: {this.props.dataPost.data.owner}</Text>
+                    <Text style={styles.info}>Texto del Post: {this.props.dataPost.data.description}</Text>
+                     <Text style={styles.info}>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
                     {
                         this.state.myLike ?
                         <TouchableOpacity onPress={()=> this.unLike()}>
-                            <Text>Quitar Like</Text>
+                            <Text style={styles.info}>Quitar Like</Text>
                         </TouchableOpacity> :
                         <TouchableOpacity onPress={()=> this.like()}>
-                            <Text>Like</Text>
+                            <Text style={styles.info}>Like</Text>
                         </TouchableOpacity>                
                     }
                     <TouchableOpacity onPress={ () => this.props.navigation.navigate('Comments', { id: this.props.dataPost.id})} > 
-                        <Text>Ver comentarios</Text>
+                        <Text style={styles.info}>Ver comentarios</Text>
                     </TouchableOpacity>   
                     
                 </View>
@@ -87,9 +87,17 @@ const styles = StyleSheet.create({
     separator:{
         borderBottomColor: '#ddd',
         borderBottomWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal:20
+        
+        borderTopColor: '#ddd',
+        borderTopWidth: 1,
+        rowGap: 2,
+        alignItems: 'center'
     },
+    info:{
+        fontFamily: 'arial',
+        marginTop: 3,
+        marginBottom: 3
+    }
     
 })
 

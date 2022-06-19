@@ -54,7 +54,7 @@ class Comments extends Component{
     render(){
         
         return(
-                <View>
+                <View style={styles.container}>
                     {this.state.commentText.lenght===0?
                     <Text> Aún no hay comentarios. Sé el primero en opinar</Text>:null}
                     
@@ -84,7 +84,8 @@ class Comments extends Component{
 const styles = StyleSheet.create({
     container:{
         paddingHorizontal:10,
-        marginTop: 10
+        marginTop: 10,
+        rowGap: 20
     },
     title:{
         marginBottom:20
@@ -94,16 +95,19 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 2,
         padding:3,
-        marginBottom:8
-
+        marginBottom:8,
+        rowGap: 10,
+        marginHorizontal: 10
     },
     button: {
         borderRadius: 2,
         padding:3,
         backgroundColor: 'green',
+        paddingHorizontal:10,
     },
     buttonText:{
-        color: '#fff'
+        color: '#fff',
+        textAlign: 'center'
     }
 })
 

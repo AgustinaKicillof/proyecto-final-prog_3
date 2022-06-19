@@ -52,14 +52,17 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     title:{
-        marginBottom:20
+        marginBottom:15,
+        fontSize: 25,
+        textAlign: 'center'
     },
     field:{
         borderColor: '#dcdcdc',
         borderWidth: 1,
         borderRadius: 2,
         padding:3,
-        marginBottom:8
+        marginBottom:8,
+        
 
     }
 })

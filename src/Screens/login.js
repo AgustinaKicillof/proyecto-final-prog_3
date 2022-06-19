@@ -11,7 +11,7 @@ class login extends Component {
     }
     render() {
         return (
-            <View>
+            
                  <View style={styles.container}>
                 <Text style={styles.title}>Inicio de Sesión</Text>
                 <TextInput 
@@ -27,24 +27,33 @@ class login extends Component {
                     secureTextEntry={true}
                     onChangeText={text => this.setState({ password: text})}
                 />
-                <TouchableOpacity onPress={()=>this.props.route.params.login(this.state.email, this.state.password)} disabled={this.state.email.length===0 || this.state.password.length===0?true:false}>
-                    <Text>Iniciar Sesión</Text>
+                <TouchableOpacity style={styles.button} onPress={()=>this.props.route.params.login(this.state.email, this.state.password)} disabled={this.state.email.length===0 || this.state.password.length===0?true:false}>
+                    <Text style={styles.buttonText}>Iniciar Sesión</Text>
                 </TouchableOpacity>       
-            </View>
+            
 
-              <TouchableOpacity onPress={()=>this.props.navigation.navigate("Register")}>Register</TouchableOpacity>  
-              <Text>{this.props.errores}</Text>
+              <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate("Register")}>
+                <Text style={styles.buttonText}>Register</Text></TouchableOpacity>  
+              <Text style={styles.buttonText}>{this.props.errores}</Text>
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
+    majorContainer:{
+        rowGap: 10,
+        paddingHorizontal:10,
+        marginTop: 10,
+    },
     container:{
         paddingHorizontal:10,
-        marginTop: 10
+        marginTop: 10,
+        rowGap: 10
     },
     title:{
-        marginBottom:20
+        marginBottom:15,
+        fontSize: 25,
+        textAlign: 'center'
     },
     field:{
         borderColor: '#dcdcdc',
@@ -53,6 +62,15 @@ const styles = StyleSheet.create({
         padding:3,
         marginBottom:8
 
+    },
+    button: {
+        borderRadius: 2,
+        padding:3,
+        backgroundColor: 'green',
+    },
+    buttonText:{
+        color: '#fff',
+        textAlign: 'center'
     }
 })
 
