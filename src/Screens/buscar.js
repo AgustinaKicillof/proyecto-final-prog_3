@@ -10,7 +10,7 @@ class Buscar extends Component {
             posts: [],
             searchText: '',
             usuarios: '',
-            resultado: false
+            
         }
     }
     buscar(usuarios){
@@ -27,7 +27,7 @@ class Buscar extends Component {
                 this.setState({
                     posts: posts,
                     searchText: '',
-                    resultado: true
+                    
                 })
             }
         )
@@ -55,18 +55,19 @@ class Buscar extends Component {
                 </TouchableOpacity>
                 
                 {
-                    this.state.resultado ? 
-                    <FlatList 
+                    this.state.posts.length===0 ? 
+                    <View style={styles.button2}>
+                    <Text style={styles.buttonText2}>El usuario no existe o aún no tiene publicaciones</Text>
+                </View>
+                    
+                
+                :
+                <FlatList 
                     data={this.state.posts}
                     keyExtractor={post => post.id}
                     renderItem = { ({item}) => <Post dataPost={item} 
                     {...this.props} />}
-                />
-                :
-                <View style={styles.button2}>
-                    <Text style={styles.buttonText2}>El usuario no existe o aún no tiene publicaciones</Text>
-                </View>
-
+                    />
                 }
                 
             </View>
@@ -76,7 +77,8 @@ class Buscar extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        rowGap: 10
+        rowGap: 10,
+        flex: 1
     },
     title:{
         marginBottom:10,
