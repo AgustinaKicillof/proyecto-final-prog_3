@@ -80,7 +80,7 @@ class MyCamera extends Component{
             <View style={styles.cameraBody}>
             { this.state.permission ?
                 this.state.showCamera ?
-                    <View style={styles.cameraBody}> 
+                    <View style={styles.cameraContainer}> 
                         <Camera 
                             style={styles.cameraBody}
                             type={Camera.Constants.Type.front}
@@ -100,18 +100,20 @@ class MyCamera extends Component{
                             resizeMode='cover'
                         />
                         <TouchableOpacity 
-                            style={styles.button}
+                            style={styles.smallButton}
                             onPress={()=>this.guardarFoto()}>
-                            <Text>Guardar Foto</Text>
+                            <Text style={styles.smallButtonText}>Guardar Foto</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                            style={styles.button}
+                            style={styles.smallButton}
                             onPress={()=>this.eliminarPreview()}>
-                            <Text>Eliminar</Text>
+                            <Text style={styles.smallButtonText}>Eliminar</Text>
                         </TouchableOpacity>
                     </View> 
                 :
-                <Text> No tengo permisos de cámara</Text>
+                <View style={styles.denialContainer}>
+                    <Text style={styles.denialText}> No tengo permisos de cámara</Text>
+                </View>
             }
             </View>
         )
@@ -120,29 +122,67 @@ class MyCamera extends Component{
 }
 
 const styles = StyleSheet.create({
+    cameraContainer:{
+        height: '90%'
+    },
     cameraBody: {
-        height: '80%',
-        alignItems: 'center'
+        height: '90%',
+        
     },
     button:{
         height: '20%',
-        width: '150%',
+        width: '100%',
         borderColor: '#ccc',
         borderWidth: 1,
         padding: 5,
         borderRadius: 4,
         marginTop: 20,
         backgroundColor: 'green',
+        alignItems: 'center'
         
+    },
+    smallButton:{
+        height: '10%',
+        width: '100%',
+        borderColor: '#ccc',
+        borderWidth: 1,
+        padding: 5,
+        borderRadius: 4,
+        marginTop: 10,
+        backgroundColor: 'green',
+        alignItems: 'center'
     },
     buttonText:{
         textAlign: 'center',
         color: 'white',
-        marginTop: 10,
+        marginTop: 18,
+        fontSize: 20
+    },
+    smallButtonText:{
+        textAlign: 'center',
+        color: 'white',
+        
         fontSize: 20
     },
     preview:{
         height:'80%'
+    },
+    denialContainer:{
+        height: '20%',
+        width: '100%',
+        borderColor: '#ccc',
+        borderWidth: 1,
+        padding: 5,
+        borderRadius: 4,
+        marginTop: 20,
+        backgroundColor: 'red',
+        alignItems: 'center'
+    },
+    denialText:{
+        textAlign: 'center',
+        color: 'white',
+        marginTop: 18,
+        fontSize: 20
     }
 }) 
 

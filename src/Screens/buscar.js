@@ -1,7 +1,39 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TextInput, TouchableOpacity, FlatList} from 'react-native';
+import { auth, db } from "../Firebase/Config";
+import Post from './Post';
 
 class Buscar extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            posts: [],
+            searchText: '',
+            usuarios: '',
+            resultado: false
+        }
+    }
+    buscar(usuarios){
+        db.collection('posts').where('owner','==',usuarios).onSnapshot(
+            docs => {
+                let posts = [];
+                docs.forEach( oneDoc => {
+                    posts.push({
+                        id: oneDoc.id,
+                        data: oneDoc.data()
+                    })
+                })
+
+                this.setState({
+                    posts: posts,
+                    searchText: '',
+                    resultado: true
+                })
+            }
+        )
+
+        
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -11,9 +43,32 @@ class Buscar extends Component {
                     style={styles.field}
                     keyboardType='default'
                     placeholder='Buscar usuario'
-                    
+                    onChangeText={(text) => this.setState({ searchText: text})}
+                    value={this.state.searchText}
                     
                 />
+                <TouchableOpacity 
+                style={styles.button}
+                onPress={()=>this.buscar(this.state.searchText)}
+                >
+                    <Text style={styles.buttonText}>Buscar</Text>
+                </TouchableOpacity>
+                
+                {
+                    this.state.resultado ? 
+                    <FlatList 
+                    data={this.state.posts}
+                    keyExtractor={post => post.id}
+                    renderItem = { ({item}) => <Post dataPost={item} 
+                    {...this.props} />}
+                />
+                :
+                <View style={styles.button2}>
+                    <Text style={styles.buttonText2}>El usuario no existe o aún no tiene publicaciones</Text>
+                </View>
+
+                }
+                
             </View>
         );
     }
@@ -43,6 +98,26 @@ const styles = StyleSheet.create({
         rowGap: 10,
         marginHorizontal: 10
     },
+    button:{
+        borderRadius: 2,
+        padding:3,
+        backgroundColor: 'green',
+        marginHorizontal: 10
+    },
+    button2:{
+        borderRadius: 2,
+        padding:3,
+        backgroundColor: 'red',
+        marginHorizontal: 10
+    },
+    buttonText:{
+        color: '#fff',
+        textAlign: 'center'
+    },
+    buttonText2:{
+        color: '#fff',
+        textAlign: 'center'
+    }
 })
 
 export default Buscar;
