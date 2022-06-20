@@ -61,8 +61,8 @@ class Profile extends Component {
                <TouchableOpacity style={styles.button} onPress={()=>this.props.route.params.logout()}>
                 <Text style={styles.buttonText}>Cerrar sesión</Text>
                </TouchableOpacity>
-               <View>
-               <FlatList 
+               <View style={styles.view}>
+                    <FlatList 
                         data={this.state.posts}
                         keyExtractor={post => post.id}
                         renderItem = { ({item}) => <Post dataPost={item} 
@@ -76,6 +76,7 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         
     },
     title:{
@@ -107,6 +108,9 @@ const styles = StyleSheet.create({
         padding:3,
         marginBottom:8,
         rowGap: 10
+    },
+    view:{
+        flex:1,
     }
 })
 
