@@ -55,8 +55,8 @@ class Comments extends Component{
         
         return(
                 <View style={styles.container}>
-                    {this.state.commentText.length===0?
-                    <Text> Aún no hay comentarios. Sé el primero en opinar</Text>:null}
+                    {this.state.comments.length===0?
+                    <Text> Aún no hay comentarios. Sé el primero en opinar</Text>:
                     
                     
                     <FlatList 
@@ -64,7 +64,7 @@ class Comments extends Component{
                         keyExtractor={ post => post.createdAt}
                         renderItem = { ({item}) => <Text>{item.owner}: {item.text}</Text> }
                     />
-                    
+                }
                     <TextInput 
                     style={styles.field}
                     keyboardType='default'

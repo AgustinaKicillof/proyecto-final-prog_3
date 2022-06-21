@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import {View, StyleSheet, Text, TextInput, TouchableOpacity, FlatList} from 'react-native';
-import { auth, db } from "../Firebase/Config";
+import { db } from "../Firebase/Config";
 import Post from './Post';
 
 class Buscar extends Component {
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
             posts: [],
             searchText: '',
         }
     }
     buscar(searchText){
-        db.collection('posts').where('owner','==',searchText).onSnapshot(
+        db.collection('posts').where('owner','==',searchText).orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posts = [];
                 docs.forEach( oneDoc => {
@@ -25,12 +25,9 @@ class Buscar extends Component {
                 this.setState({
                     posts: posts,
                     searchText: '',
-                    
                 })
             }
         )
-
-        
     }
     render() {
         return (
@@ -43,7 +40,6 @@ class Buscar extends Component {
                     placeholder='Buscar usuario'
                     onChangeText={(text) => this.setState({ searchText: text})}
                     value={this.state.searchText}
-                    
                 />
                 <TouchableOpacity 
                 style={styles.button}
@@ -57,8 +53,6 @@ class Buscar extends Component {
                     <View style={styles.button2}>
                     <Text style={styles.buttonText2}>El usuario no existe o aún no tiene publicaciones</Text>
                 </View>
-                    
-                
                 :
                 <FlatList 
                     data={this.state.posts}

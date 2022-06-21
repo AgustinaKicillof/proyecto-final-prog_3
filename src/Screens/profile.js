@@ -28,7 +28,7 @@ class Profile extends Component {
                 })
             }
         )
-        db.collection('posts').where("owner","==",auth.currentUser.email).onSnapshot(
+        db.collection('posts').where("owner","==",auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posts = [];
                 docs.forEach( oneDoc => {
