@@ -7,12 +7,12 @@ class Buscar extends Component {
     constructor(){
         super();
         this.state = {
-            posts: [],
+            posts: null,
             searchText: '',
         }
     }
     buscar(searchText){
-        db.collection('posts').where('owner','==',searchText).orderBy('createdAt', 'desc').onSnapshot(
+        db.collection('posts').where('owner','==',searchText).onSnapshot(
             docs => {
                 let posts = [];
                 docs.forEach( oneDoc => {
@@ -49,6 +49,7 @@ class Buscar extends Component {
                 </TouchableOpacity>
                 
                 {
+                    this.state.posts?
                     this.state.posts.length===0 ? 
                     <View style={styles.button2}>
                     <Text style={styles.buttonText2}>El usuario no existe o aún no tiene publicaciones</Text>
@@ -60,6 +61,7 @@ class Buscar extends Component {
                     renderItem = { ({item}) => <Post dataPost={item} 
                     {...this.props} />}
                     />
+                    :null
                 }
                 
             </View>
