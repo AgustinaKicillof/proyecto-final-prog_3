@@ -76,22 +76,23 @@ class Post extends Component {
           style={styles.image}
         />
         {this.state.myLike ? (
-          <TouchableOpacity onPress={() => this.unLike()}>
-            <Text style={styles.info}>Quitar Like</Text>
+          <TouchableOpacity style={styles.buttonDislike} onPress={() => this.unLike()}>
+            <Text style={styles.buttonDislikeText}>Quitar Like</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity onPress={() => this.like()}>
-            <Text style={styles.info}>Like</Text>
+          <TouchableOpacity style={styles.buttonLike} onPress={() => this.like()}>
+            <Text style={styles.buttonLikeText}>Like</Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity
+        style={styles.buttonLike}
           onPress={() =>
             this.props.navigation.navigate("Comments", {
               id: this.props.dataPost.id,
             })
           }
         >
-          <Text style={styles.info}>Ver comentarios</Text>
+          <Text style={styles.buttonLikeText}>Ver comentarios</Text>
         </TouchableOpacity>
       </View>
     );
@@ -105,18 +106,35 @@ const styles = StyleSheet.create({
 
     borderTopColor: "#ddd",
     borderTopWidth: 1,
-    rowGap: 2,
+    rowGap: 9,
     alignItems: "center",
   },
   info: {
     fontFamily: "arial",
     marginTop: 3,
     marginBottom: 3,
+    padding: 3
   },
   image: {
     height: 200,
     width: 200,
   },
+  buttonDislike: {
+    backgroundColor: 'red',
+    borderRadius: 4,
+  },
+  buttonDislikeText:{
+    padding: 2,
+    color: 'white'
+  },
+  buttonLike:{
+    backgroundColor: 'green',
+    borderRadius: 4,
+  },
+  buttonLikeText:{
+    padding: 2,
+    color: 'white'
+  }
 });
 
 export default Post;

@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
         marginBottom:15,
         fontSize: 25,
         textAlign: 'center',
-        fontFamily: 'arial'
-        
+        fontFamily: 'arial',
+        fontWeight: 'bold'
     }
 })
 

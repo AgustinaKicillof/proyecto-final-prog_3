@@ -9,12 +9,10 @@ class Buscar extends Component {
         this.state = {
             posts: [],
             searchText: '',
-            usuarios: '',
-            
         }
     }
-    buscar(usuarios){
-        db.collection('posts').where('owner','==',usuarios).onSnapshot(
+    buscar(searchText){
+        db.collection('posts').where('owner','==',searchText).onSnapshot(
             docs => {
                 let posts = [];
                 docs.forEach( oneDoc => {

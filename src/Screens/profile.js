@@ -53,10 +53,12 @@ class Profile extends Component {
                <ActivityIndicator size="large" color="red"/>
             :
             <>
+             <View style={styles.infoContainer}>
              <Text style={styles.info}>Username: {this.state.user.data.username}</Text>
                <Text style={styles.info}>Correo: {auth.currentUser.email}</Text> 
                <Text style={styles.info}>Fecha de ultimo ingreso: {auth.currentUser.metadata.lastSignInTime} </Text>
-               <Text style={styles.info}>Cantidad de posteos: {this.state.posts.length} </Text></>
+               <Text style={styles.info}>Cantidad de posteos: {this.state.posts.length} </Text>
+               </View></>
             }
                <TouchableOpacity style={styles.button} onPress={()=>this.props.route.params.logout()}>
                 <Text style={styles.buttonText}>Cerrar sesión</Text>
@@ -87,14 +89,19 @@ const styles = StyleSheet.create({
     },
     info: {
         textAlign: 'center',
-        fontFamily: 'arial'
+        fontFamily: 'arial',
+        
+    },
+    infoContainer:{
+        rowGap: 10
     },
     button: {
         borderRadius: 2,
         padding:3,
         backgroundColor: 'green',
         paddingHorizontal:10,
-        marginHorizontal: 100
+        marginHorizontal: 100,
+        marginTop: 5
     },
     buttonText:{
         color: '#fff',
@@ -111,6 +118,7 @@ const styles = StyleSheet.create({
     },
     view:{
         flex:1,
+        marginTop: 10,
     }
 })
 
