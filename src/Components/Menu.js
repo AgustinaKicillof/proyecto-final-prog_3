@@ -49,8 +49,7 @@ class Menu extends Component {
   }
 
   login(email, password) {
-    //Debería loguear en Firebase y cambiar el estado loggedIn: true
-    //Debe pasar como método a el componente login
+   
     auth
       .signInWithEmailAndPassword(email, password)
       .then((response) => console.log(response))

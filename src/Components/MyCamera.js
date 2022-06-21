@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     cameraBody: {
         height: '80%',
         alignItems: 'center'
+        
     },
     button:{
         height: '20%',
