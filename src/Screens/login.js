@@ -34,7 +34,14 @@ class login extends Component {
 
               <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate("Register")}>
                 <Text style={styles.buttonText}>Register</Text></TouchableOpacity>  
+                {
+                this.props.errores==0 ?
+                null:
+                <View style={styles.buttonDenial}>
               <Text style={styles.buttonText}>{this.props.errores}</Text>
+              </View>
+
+              }
             </View>
         );
     }
@@ -68,8 +75,17 @@ const styles = StyleSheet.create({
         padding:3,
         backgroundColor: 'green',
     },
+    buttonDenial: {
+        borderRadius: 2,
+        padding:3,
+        backgroundColor: 'red',
+    },
     buttonText:{
         color: '#fff',
+        textAlign: 'center'
+    },
+    buttonTextDenial:{
+        color: 'black',
         textAlign: 'center'
     }
 })

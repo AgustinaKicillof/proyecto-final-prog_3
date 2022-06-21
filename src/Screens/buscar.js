@@ -1,7 +1,34 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TextInput, TouchableOpacity, FlatList} from 'react-native';
+import { db } from "../Firebase/Config";
+import Post from './Post';
 
 class Buscar extends Component {
+    constructor(){
+        super();
+        this.state = {
+            posts: [],
+            searchText: '',
+        }
+    }
+    buscar(searchText){
+        db.collection('posts').where('owner','==',searchText).orderBy('createdAt', 'desc').onSnapshot(
+            docs => {
+                let posts = [];
+                docs.forEach( oneDoc => {
+                    posts.push({
+                        id: oneDoc.id,
+                        data: oneDoc.data()
+                    })
+                })
+
+                this.setState({
+                    posts: posts,
+                    searchText: '',
+                })
+            }
+        )
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -11,9 +38,30 @@ class Buscar extends Component {
                     style={styles.field}
                     keyboardType='default'
                     placeholder='Buscar usuario'
-                    
-                    
+                    onChangeText={(text) => this.setState({ searchText: text})}
+                    value={this.state.searchText}
                 />
+                <TouchableOpacity 
+                style={styles.button}
+                onPress={()=>this.buscar(this.state.searchText)}
+                >
+                    <Text style={styles.buttonText}>Buscar</Text>
+                </TouchableOpacity>
+                
+                {
+                    this.state.posts.length===0 ? 
+                    <View style={styles.button2}>
+                    <Text style={styles.buttonText2}>El usuario no existe o aún no tiene publicaciones</Text>
+                </View>
+                :
+                <FlatList 
+                    data={this.state.posts}
+                    keyExtractor={post => post.id}
+                    renderItem = { ({item}) => <Post dataPost={item} 
+                    {...this.props} />}
+                    />
+                }
+                
             </View>
         );
     }
@@ -21,7 +69,8 @@ class Buscar extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        rowGap: 10
+        rowGap: 10,
+        flex: 1
     },
     title:{
         marginBottom:10,
@@ -43,6 +92,26 @@ const styles = StyleSheet.create({
         rowGap: 10,
         marginHorizontal: 10
     },
+    button:{
+        borderRadius: 2,
+        padding:3,
+        backgroundColor: 'green',
+        marginHorizontal: 10
+    },
+    button2:{
+        borderRadius: 2,
+        padding:3,
+        backgroundColor: 'red',
+        marginHorizontal: 10
+    },
+    buttonText:{
+        color: '#fff',
+        textAlign: 'center'
+    },
+    buttonText2:{
+        color: '#fff',
+        textAlign: 'center'
+    }
 })
 
 export default Buscar;

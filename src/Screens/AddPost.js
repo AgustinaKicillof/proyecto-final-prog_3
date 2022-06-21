@@ -48,16 +48,17 @@ class AddPost extends Component{
     render(){
         return(
             <View style={styles.container}>
+                <Text style={styles.title}>Nuevo Post</Text>
             {
                 this.state.showCamera ?
                     <MyCamera onImageUpload={url => this.onImageUpload(url)}/> 
                 :
                 <View style={styles.container}>
-                    <Text style={styles.title}>Nuevo Post</Text>
+                    
                     <TextInput 
                         style={styles.field}
                         keyboardType='default'
-                        placeholder='description'
+                        placeholder='Description'
                         onChangeText={text => this.setState({ description: text})}
                         multiline
                     />
@@ -95,7 +96,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
     },
     buttonText:{
-        color: '#fff'
+        color: '#fff',
+        textAlign: 'center'
     }
 })
 

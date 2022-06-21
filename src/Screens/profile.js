@@ -28,7 +28,7 @@ class Profile extends Component {
                 })
             }
         )
-        db.collection('posts').where("owner","==",auth.currentUser.email).onSnapshot(
+        db.collection('posts').where("owner","==",auth.currentUser.email).orderBy('createdAt', 'desc').onSnapshot(
             docs => {
                 let posts = [];
                 docs.forEach( oneDoc => {
@@ -53,16 +53,18 @@ class Profile extends Component {
                <ActivityIndicator size="large" color="red"/>
             :
             <>
+             <View style={styles.infoContainer}>
              <Text style={styles.info}>Username: {this.state.user.data.username}</Text>
                <Text style={styles.info}>Correo: {auth.currentUser.email}</Text> 
                <Text style={styles.info}>Fecha de ultimo ingreso: {auth.currentUser.metadata.lastSignInTime} </Text>
-               <Text style={styles.info}>Cantidad de posteos: {this.state.posts.length} </Text></>
+               <Text style={styles.info}>Cantidad de posteos: {this.state.posts.length} </Text>
+               </View></>
             }
                <TouchableOpacity style={styles.button} onPress={()=>this.props.route.params.logout()}>
                 <Text style={styles.buttonText}>Cerrar sesión</Text>
                </TouchableOpacity>
-               <View>
-               <FlatList 
+               <View style={styles.view}>
+                    <FlatList 
                         data={this.state.posts}
                         keyExtractor={post => post.id}
                         renderItem = { ({item}) => <Post dataPost={item} 
@@ -76,6 +78,7 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         
     },
     title:{
@@ -86,14 +89,19 @@ const styles = StyleSheet.create({
     },
     info: {
         textAlign: 'center',
-        fontFamily: 'arial'
+        fontFamily: 'arial',
+        
+    },
+    infoContainer:{
+        rowGap: 10
     },
     button: {
         borderRadius: 2,
         padding:3,
         backgroundColor: 'green',
         paddingHorizontal:10,
-        marginHorizontal: 100
+        marginHorizontal: 100,
+        marginTop: 5
     },
     buttonText:{
         color: '#fff',
@@ -107,6 +115,10 @@ const styles = StyleSheet.create({
         padding:3,
         marginBottom:8,
         rowGap: 10
+    },
+    view:{
+        flex:1,
+        marginTop: 10,
     }
 })
 
