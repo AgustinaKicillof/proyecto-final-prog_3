@@ -58,8 +58,11 @@ class Post extends Component {
       )
       .catch((error) => console.log(error));
   }
-
+borrar(){
+    db.collection("posts").doc(this.props.dataPost.id).delete()
+}
   render() {
+      console.log(this.props)
     return (
       <View style={styles.separator}>
         <Text style={styles.info}>
@@ -76,24 +79,42 @@ class Post extends Component {
           style={styles.image}
         />
         {this.state.myLike ? (
-          <TouchableOpacity style={styles.buttonDislike} onPress={() => this.unLike()}>
+          <TouchableOpacity
+            style={styles.buttonDislike}
+            onPress={() => this.unLike()}
+          >
             <Text style={styles.buttonDislikeText}>Quitar Like</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity style={styles.buttonLike} onPress={() => this.like()}>
+          <TouchableOpacity
+            style={styles.buttonLike}
+            onPress={() => this.like()}
+          >
             <Text style={styles.buttonLikeText}>Like</Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity
-        style={styles.buttonLike}
+          style={styles.buttonLike}
           onPress={() =>
             this.props.navigation.navigate("Comments", {
               id: this.props.dataPost.id,
             })
           }
         >
-          <Text style={styles.buttonLikeText}>Ver comentarios</Text>
+          <Text style={styles.buttonLikeText}>
+            Ver {this.props.dataPost.data.comments.length} comentarios
+          </Text>
         </TouchableOpacity>
+        {this.props.dataPost.data.owner==auth.currentUser.email?
+            <TouchableOpacity
+          style={styles.buttonDislike}
+          onPress={() => this.borrar()}
+        >
+          <Text style={styles.buttonDislikeText}>Borrar</Text>
+        </TouchableOpacity>
+        : null
+        }
+        
       </View>
     );
   }
@@ -113,28 +134,28 @@ const styles = StyleSheet.create({
     fontFamily: "arial",
     marginTop: 3,
     marginBottom: 3,
-    padding: 3
+    padding: 3,
   },
   image: {
     height: 200,
     width: 200,
   },
   buttonDislike: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
     borderRadius: 4,
   },
-  buttonDislikeText:{
+  buttonDislikeText: {
     padding: 2,
-    color: 'white'
+    color: "white",
   },
-  buttonLike:{
-    backgroundColor: 'green',
+  buttonLike: {
+    backgroundColor: "green",
     borderRadius: 4,
   },
-  buttonLikeText:{
+  buttonLikeText: {
     padding: 2,
-    color: 'white'
-  }
+    color: "white",
+  },
 });
 
 export default Post;
