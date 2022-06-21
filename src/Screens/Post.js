@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
   buttonDislike: {
     backgroundColor: "red",
     borderRadius: 4,
+    marginBottom: 3
   },
   buttonDislikeText: {
     padding: 2,
@@ -151,6 +152,7 @@ const styles = StyleSheet.create({
   buttonLike: {
     backgroundColor: "green",
     borderRadius: 4,
+    marginBottom: 5
   },
   buttonLikeText: {
     padding: 2,
